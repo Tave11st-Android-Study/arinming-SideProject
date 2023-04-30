@@ -1,6 +1,9 @@
 package com.example.tavetoy
 
 data class BookRoot(
-    val key: String,
-    val data: BookData
+    val query: String,
+    val display: Int,
+    val start: Int,
+    val sort: String,
+    val book: BookData
 )

@@ -5,9 +5,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface RetrofitService {
-    @GET("search.api/item/{book}")
+    @GET("v1/search/blog?query={item}")
     fun getBook (
-        @Path("book")
+        @Path("item")
         book: String
     ): Call<BookRoot>
 
