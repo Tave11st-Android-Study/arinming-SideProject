@@ -10,18 +10,15 @@ interface RetrofitService {
         clientId: String,
         @Header("X-Naver-Client-Secret")
         clientSecret: String,
-        @Query("item")
+        @Query("query")
         query: String,
         @Query("display")
         display: Int? = null,
         @Query("start")
         start: Int? = null
     ): Call<BookRoot>
-    fun getBook (
-
-    ): Call<BookRoot>
     fun getBookItem (
-        @Path("item")
+        @Query("item")
         title: String
     ): Call<BookData>
 
