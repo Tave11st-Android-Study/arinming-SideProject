@@ -13,7 +13,7 @@ interface RetrofitService {
         @Query("query")
         query: String,
         @Query("book")
-        book: String? = null,
+        book: BookData? = null,
         @Query("display")
         display: Int? = null,
         @Query("start")
