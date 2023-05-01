@@ -36,9 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         val CLIENT_ID = "GBRvp2C0B4A0iYQjFL6z"
         val CLIENT_SECRET = "F0TaAoZUIT"
-        val callGetSearchBookData = bookService.getBookData(CLIENT_ID, CLIENT_SECRET, "테스트")
-
-        callGetSearchBookData.enqueue(object : Callback<BookRoot>{
+        val callGetSearchBookData = bookService.getBookData(CLIENT_ID, CLIENT_SECRET, "테스트", "비행운")
+/*
+        callGetSearchBookData
+            .enqueue(object : Callback<BookRoot>{
             override fun onResponse(call: Call<BookRoot>, response: Response<BookRoot>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
@@ -50,20 +51,21 @@ class MainActivity : AppCompatActivity() {
                 Log.d("로그", t.message.toString())
             }
         })
-        /*
+        */
         bookService
-            .getBook("토지", 1, 1)
+            .getBookData(CLIENT_ID, CLIENT_SECRET, "비행운")
             .enqueue(object: Callback<BookRoot> {
                 override fun onResponse(call: Call<BookRoot>, response: Response<BookRoot>) {
                     if (response.isSuccessful) {
-                        binding.textView.text = response.body()?.book?.title.toString()
+                        Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
+                        binding.textView.text = response.toString()
                     }
                 }
 
                 override fun onFailure(call: Call<BookRoot>, t: Throwable) {
                     Log.d("로그", t.message.toString())
                 }
-            })*/
+            })
     }
 
 }

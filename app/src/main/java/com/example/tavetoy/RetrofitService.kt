@@ -12,6 +12,8 @@ interface RetrofitService {
         clientSecret: String,
         @Query("query")
         query: String,
+        @Query("book")
+        book: String? = null,
         @Query("display")
         display: Int? = null,
         @Query("start")
