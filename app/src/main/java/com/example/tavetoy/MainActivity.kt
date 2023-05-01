@@ -53,12 +53,12 @@ class MainActivity : AppCompatActivity() {
         })
         */
         bookService
-            .getBookData(CLIENT_ID, CLIENT_SECRET, "비행운")
+            .getBookData(CLIENT_ID, CLIENT_SECRET, "안드로이드")
             .enqueue(object: Callback<BookRoot> {
                 override fun onResponse(call: Call<BookRoot>, response: Response<BookRoot>) {
                     if (response.isSuccessful) {
                         Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
-                        binding.textView.text = response.toString()
+                        binding.textView.text = response.body()?.display.toString()
                     }
                 }
 
