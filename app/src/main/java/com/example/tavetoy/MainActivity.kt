@@ -45,13 +45,13 @@ class MainActivity : AppCompatActivity() {
             if (binding.textView.text != null) {
                 // API 불러오기
                 bookService
-                    .getBookData(CLIENT_ID, CLIENT_SECRET, "비행운")
+                    .getBookData(CLIENT_ID, CLIENT_SECRET, binding.edtBook.text.toString())
                     .enqueue(object: Callback<BookRoot> {
                         override fun onResponse(call: Call<BookRoot>, response: Response<BookRoot>) {
                             // 성공적으로 불러옴 : 코드 200
                             if (response.isSuccessful) {
                                 Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
-                                binding.textView.text = response.body()?.book?.title.toString()
+                                binding.textView.text = response.body()?.display.toString()
                             }
                         }
 
