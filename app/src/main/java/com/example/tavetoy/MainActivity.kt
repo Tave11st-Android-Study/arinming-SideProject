@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
                             if (response.isSuccessful) {
                                 Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
                                 binding.tvTitle.text = response.body()?.items.toString()
-                                binding.tvDisplay.text = response.body().toString()
                             }
                         }
 
