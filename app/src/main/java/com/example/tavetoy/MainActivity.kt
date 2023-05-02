@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                             // 성공적으로 불러옴 : 코드 200
                             if (response.isSuccessful) {
                                 Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
-                                binding.tvTitle.text = response.body().toString()
+                                binding.tvTitle.text = response.body()?.items.toString()
                                 binding.tvDisplay.text = response.body().toString()
                             }
                         }
