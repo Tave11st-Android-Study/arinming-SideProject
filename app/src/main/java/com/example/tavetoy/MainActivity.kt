@@ -41,24 +41,31 @@ class MainActivity : AppCompatActivity() {
         val CLIENT_ID = "GBRvp2C0B4A0iYQjFL6z"
         val CLIENT_SECRET = "F0TaAoZUIT"
 
+        binding.btnSearch.setOnClickListener {
+            if (binding.textView.text != null) {
+                // API 불러오기
+                bookService
+                    .getBookData(CLIENT_ID, CLIENT_SECRET, "비행운")
+                    .enqueue(object: Callback<BookRoot> {
+                        override fun onResponse(call: Call<BookRoot>, response: Response<BookRoot>) {
+                            // 성공적으로 불러옴 : 코드 200
+                            if (response.isSuccessful) {
+                                Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
+                                binding.textView.text = response.body()?.book?.title.toString()
+                            }
+                        }
 
-        // API 불러오기
-        bookService
-            .getBookData(CLIENT_ID, CLIENT_SECRET, "비행운")
-            .enqueue(object: Callback<BookRoot> {
-                override fun onResponse(call: Call<BookRoot>, response: Response<BookRoot>) {
-                    // 성공적으로 불러옴 : 코드 200
-                    if (response.isSuccessful) {
-                        Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
-                        binding.textView.text = response.body()?.book?.title.toString()
-                    }
-                }
+                        // 불러오기 실패
+                        override fun onFailure(call: Call<BookRoot>, t: Throwable) {
+                            Log.d("로그", t.message.toString())
+                        }
+                    })
+            }
+            else {
+                Toast.makeText(this@MainActivity, "책 이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
 
-                // 불러오기 실패
-                override fun onFailure(call: Call<BookRoot>, t: Throwable) {
-                    Log.d("로그", t.message.toString())
-                }
-            })
     }
 
 }
