@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.tavetoy.databinding.ActivityMainBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     // 뷰바인딩
     private lateinit var binding: ActivityMainBinding
 
+
     // 레트로핏 서비스 선언
     private val retrofitService by lazy { retrofitBuilder() }
 
@@ -27,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+    val bookService: RetrofitService =
+        retrofitService.create(RetrofitService::class.java)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 뷰 바인딩
@@ -34,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val bookService: RetrofitService =
-            retrofitService.create(RetrofitService::class.java)
+
+
 
         // 클라이언트 아이디, 패스워드
         val CLIENT_ID = "GBRvp2C0B4A0iYQjFL6z"
@@ -52,8 +58,8 @@ class MainActivity : AppCompatActivity() {
                             // 성공적으로 불러옴 : 코드 200
                             if (response.isSuccessful) {
                                 Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
-                                binding.tvTitle.text = response.body()?.item.toString()
-                                binding.tvDisplay.text = response.body()?.display.toString()
+                                binding.tvTitle.text = response.body().toString()
+                                binding.tvDisplay.text = response.body().toString()
                             }
                         }
 
