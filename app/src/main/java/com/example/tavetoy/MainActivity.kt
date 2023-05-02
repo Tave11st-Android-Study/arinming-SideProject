@@ -41,8 +41,12 @@ class MainActivity : AppCompatActivity() {
         val CLIENT_ID = "GBRvp2C0B4A0iYQjFL6z"
         val CLIENT_SECRET = "F0TaAoZUIT"
 
+
+
+
+
         binding.btnSearch.setOnClickListener {
-            if (binding.textView.text != null) {
+            if (binding.edtBook.text != null) {
                 // API 불러오기
                 bookService
                     .getBookData(CLIENT_ID, CLIENT_SECRET, binding.edtBook.text.toString())
@@ -61,9 +65,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     })
             }
-            else {
-                Toast.makeText(this@MainActivity, "책 이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
-            }
+
         }
 
     }
