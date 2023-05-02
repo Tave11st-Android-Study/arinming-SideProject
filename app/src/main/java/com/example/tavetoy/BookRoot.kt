@@ -5,5 +5,5 @@ data class BookRoot(
     val display: Int,
     val start: Int,
     val sort: String,
-    val book: BookData
+    val item: BookData
 )

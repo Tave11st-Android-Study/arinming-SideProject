@@ -12,7 +12,7 @@ interface RetrofitService {
         clientSecret: String,
         @Query("query")
         query: String,
-        @Query("book")
+        @Query("item")
         book: BookData? = null,
         @Query("display")
         display: Int? = null,

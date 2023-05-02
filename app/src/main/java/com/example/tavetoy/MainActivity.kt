@@ -42,9 +42,6 @@ class MainActivity : AppCompatActivity() {
         val CLIENT_SECRET = "F0TaAoZUIT"
 
 
-
-
-
         binding.btnSearch.setOnClickListener {
             if (binding.edtBook.text != null) {
                 // API 불러오기
@@ -55,7 +52,8 @@ class MainActivity : AppCompatActivity() {
                             // 성공적으로 불러옴 : 코드 200
                             if (response.isSuccessful) {
                                 Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
-                                binding.textView.text = response.body()?.display.toString()
+                                binding.tvTitle.text = response.body()?.item.toString()
+                                binding.tvDisplay.text = response.body()?.display.toString()
                             }
                         }
 
