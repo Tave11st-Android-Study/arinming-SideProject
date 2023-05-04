@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
 
-
-
         // 클라이언트 아이디, 패스워드
         val CLIENT_ID = "GBRvp2C0B4A0iYQjFL6z"
         val CLIENT_SECRET = "F0TaAoZUIT"
@@ -58,7 +56,9 @@ class MainActivity : AppCompatActivity() {
                             // 성공적으로 불러옴 : 코드 200
                             if (response.isSuccessful) {
                                 Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
-                                binding.tvTitle.text = response.body()?.items?.get(1)?.author.toString()
+                                binding.tvTitle.text = response.body()?.items?.get(1)?.title.toString()
+                                binding.tvAuthor.text = response.body()?.items?.get(1)?.author.toString()
+                                binding.tvDescription.text = response.body()?.items?.get(1)?.description.toString()
                             }
                         }
 
