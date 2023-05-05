@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
                             // 성공적으로 불러옴 : 코드 200
                             if (response.isSuccessful) {
                                 Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
+                                binding.ivBook.setImageResource(response.body()?.items?.get(1)?.image.hashCode())
                                 binding.tvTitle.text = response.body()?.items?.get(1)?.title.toString()
                                 binding.tvAuthor.text = response.body()?.items?.get(1)?.author.toString()
                                 binding.tvDescription.text = response.body()?.items?.get(1)?.description.toString()
