@@ -7,9 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.tavetoy.databinding.ActivityMainBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -56,7 +54,15 @@ class MainActivity : AppCompatActivity() {
                             // 성공적으로 불러옴 : 코드 200
                             if (response.isSuccessful) {
                                 Toast.makeText(this@MainActivity, "성공", Toast.LENGTH_SHORT).show()
-                                binding.ivBook.setImageResource(response.body()?.items?.get(1)?.image.hashCode())
+
+                                // 코루틴 스코프로 이미지 불러오기
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    val bitmap = withContext(Dispatchers.IO) {
+                                        ImageLoader.loadImage(response.body()?.items?.get(1)?.image.toString())
+                                    }
+                                    binding.ivBook.setImageBitmap(bitmap)
+                                }
+
                                 binding.tvTitle.text = response.body()?.items?.get(1)?.title.toString()
                                 binding.tvAuthor.text = response.body()?.items?.get(1)?.author.toString()
                                 binding.tvDescription.text = response.body()?.items?.get(1)?.description.toString()
